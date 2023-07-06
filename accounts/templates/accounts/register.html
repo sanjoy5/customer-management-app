@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .mycontent {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            width: 100%;
+            background-color: #003147;
+            font-family: 'Ubuntu', sans-serif;
+            flex-direction: column;
+        }
+
+        .mycontent h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: 400;
+        }
+
+        .mycontent form {
+
+            margin: 10px;
+            border: 2px solid white;
+            border-radius: 10px;
+            padding: 20px 40px 40px;
+
+        }
+
+        .mycontent form p {
+            display: block;
+            font-size: 18px;
+            margin: 10px 0;
+            color: white;
+        }
+
+        .mycontent input {
+            background-color: transparent;
+            border: 1px solid #fff;
+            outline: none;
+            height: 35px;
+            width: 300px;
+            color: white;
+            font-size: 18px;
+            padding: 5px 15px;
+        }
+
+        .formBtn {
+            display: block;
+            width: 300px;
+            font-size: 16px;
+            padding: 10px 23px;
+            border: none;
+            outline: none;
+            border-radius: 4px;
+            color: white;
+            background: #03a9f4;
+            margin: 20px 0;
+        }
+
+        .mycontent small {
+            font-size: 14px;
+            color: white;
+        }
+
+        .mycontent small a {
+            color: #03a9f4;
+            margin-left: 5px;
+        }
+
+        .message {
+            margin-bottom: 10px;
+        }
+
+        .message .errorlist li {
+            color: red;
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mycontent">
+        <h3>Register Here</h3>
+        <div class="message">
+            {{form.errors}}
+        </div>
+        <form method="POST">
+            {% csrf_token %}
+            {% for fm in form %}
+            <p>{{fm.label}}</p>
+            {{fm}}
+            {% endfor %}
+
+            <button class="formBtn" type="submit">Create User</button>
+            <small>Already have an account? <a href="{% url 'login' %}">Login</a></small>
+        </form>
+    </div>
+</body>
+
+</html>

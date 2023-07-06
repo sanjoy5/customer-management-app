@@ -1,0 +1,32 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+{% block title %}Products{% endblock title %}
+
+{% block content %}
+<div class="products">
+    <h2 class="heading">All Products</h2>
+    <div class="products-list">
+        <table>
+            <thead>
+                <tr>
+                    <td>Product</td>
+
+                    <td>Category</td>
+                    <td>Price</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in products %}
+                <tr>
+
+                    <td>{{i.name}}</td>
+                    <td>{{i.category}}</td>
+                    <td>{{i.price}}</td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock content %}

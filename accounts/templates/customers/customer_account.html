@@ -1,0 +1,25 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+{% block title %}Account{% endblock title %}
+
+
+
+{% block content %}
+
+<div class="account">
+    <div class="info">
+        <div class="propic">
+            <img src="{{request.user.customer.profile_pic.url}}" alt="">
+        </div>
+        <div class="button_section">
+            <a class="userbtn" href="{% url 'update_account' %}">Update Account</a>
+        </div>
+        <div class="data">
+            <p>Name : {{request.user.customer.name}}</p>
+            <p>Phone : {{request.user.customer.phone}}</p>
+            <p>Email : {{request.user.email}}</p>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

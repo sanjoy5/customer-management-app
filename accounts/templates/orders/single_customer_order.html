@@ -1,0 +1,19 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+{% block title %}Create Order{% endblock title %}
+
+{% block content %}
+<div class="createBox singleOrder">
+    <h2>Create Order</h2>
+    <br>
+    <form method="POST">
+        {% csrf_token %}
+        {{ formset.management_form }}
+        {% for fm in formset %}
+        <p class="inputForm">{{fm}}</p>
+        <br>
+        {% endfor %}
+        <button class="mybtn" type="submit">Create Order</button>
+    </form>
+</div>
+{% endblock content %}

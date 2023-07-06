@@ -1,0 +1,18 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+{% block title %}Delete Order{% endblock title %}
+
+{% block content %}
+<h2 class="deleteTitle">Delete Order</h2>
+<div class="deleteOrder">
+    <i class="fa fa-times-circle"></i>
+    <h2>Are you sure?</h2>
+    <p>Do you want to delete <strong>" {{item}} "?</strong> This process cannot be undone.</p>
+    <form action="{% url 'delete_order' item.id %}" method="POST">
+        {% csrf_token %}
+
+        <a href="{% url 'home' %}" class="cancelbtn">Cencel</a>
+        <input type="submit" class="deletebtn" value="Delete">
+    </form>
+</div>
+{% endblock content %}

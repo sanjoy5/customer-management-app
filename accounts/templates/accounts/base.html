@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <title>CRM | {% block title %} {% endblock title %}</title>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="{% url 'home' %}">
+                        <div class="logo"><img src="{% static 'images/logo.png' %}" width="40px" height="40px" alt="">
+                        </div>
+                        <div class="logo_title">Sanju Ltd</div>
+                    </a>
+                </li>
+
+                <!-- Condition  -->
+                {% if request.user.is_staff %}
+
+                <li>
+                    <a href="{% url 'home' %}">
+                        <span class="icon"><i class="fas fa-home"></i></span>
+                        <span class="title">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'customers' %}">
+                        <span class="icon"><i class="fas fa-users"></i></span>
+                        <span class="title">Customers</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'products' %}">
+                        <span class="icon"><i class="fas fa-box-open"></i></span>
+                        <span class="title">Products</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'create_customer' %}">
+                        <span class="icon"><i class="fas fa-user-plus"></i></span>
+                        <span class="title">Create Customer</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'create_order' %}">
+                        <span class="icon"><i class="fas fa-cart-plus"></i></span>
+                        <span class="title">Create Order</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'logout' %}">
+                        <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+                        <span class="title">Logout</span>
+                    </a>
+                </li>
+
+                {% else %}
+
+                <li>
+                    <a href="{% url 'user' %}">
+                        <span class="icon"><i class="fas fa-home"></i></span>
+                        <span class="title">Dashboard</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="{% url 'account' %}">
+                        <span class="icon"><i class="fas fa-cog"></i></span>
+                        <span class="title">Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'logout' %}">
+                        <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+                        <span class="title">Logout</span>
+                    </a>
+                </li>
+
+                {% endif %}
+
+                <!-- End  -->
+
+
+            </ul>
+        </div>
+
+        <div class="main">
+            <!-- Top Bar  -->
+
+            <div class="topbar">
+                <div onclick="toggleMenu()" class="toggle"><i class="fa fa-bars"></i></div>
+                <div class="search">
+                    <label>
+                        <input type="text" placeholder="Search here">
+                        <i class="fa fa-search"></i>
+                    </label>
+                </div>
+                {% if request.user.is_staff %}
+                <div class="user">
+                    <img src="{% static 'images/img.png' %}" alt="">
+                </div>
+                {% else %}
+                <div class="user">
+                    <img src="{{request.user.customer.profile_pic.url}}" alt="">
+                </div>
+                {% endif %}
+            </div>
+            {% block content %}
+
+            {% endblock content %}
+        </div>
+    </div>
+
+    <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+</html>

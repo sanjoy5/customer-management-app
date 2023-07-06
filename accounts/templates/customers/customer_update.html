@@ -1,0 +1,17 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+{% block title %}Update Customer{% endblock title %}
+
+{% block content %}
+<div class="createBox">
+    <h2>Update Customer</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for fm in form %}
+        <p class="label">{{fm.label}}</p>
+        <p class="inputForm">{{fm}}</p>
+        {% endfor %}
+        <input class="mybtn" type="submit" value="Update Customer">
+    </form>
+</div>
+{% endblock content %}

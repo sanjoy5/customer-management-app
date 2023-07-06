@@ -1,0 +1,71 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+{% block title %}Products{% endblock title %}
+
+{% block content %}
+<div class="customer">
+    <div class="nameBox">
+        <h2>Customer : {{customer.name}}</h2>
+    </div>
+    <div class="customerBox">
+        <div class="box">
+            <h3>Customer</h3>
+            <hr>
+            <div class="option">
+                <a href="{% url 'update_customer' customer.id %}" class="btn-block">Update Customer</a>
+                <a href="{% url 'single_customer_order' customer.id %}" class="btn-block">Place Order</a>
+            </div>
+        </div>
+        <div class="box">
+            <h3>Contact Information</h3>
+            <hr>
+            <div class="option">
+                <p>Email : {{customer.email}} </p>
+                <p>Phone : {{customer.phone}}</p>
+            </div>
+        </div>
+        <div class="box">
+            <h3>Total Orders</h3>
+            <hr>
+            <div class="option">
+                <h2>{{total_orders}}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="search-option">
+        <form method="get">
+            {{myFilter.form}}
+            <button class="submit" type="submit">Search</button>
+        </form>
+    </div>
+    <div class="customerProducts">
+        <div class="customerProducts-list">
+            <h2 class="heading">Order Products</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Product</td>
+                        <td>Category</td>
+                        <td>Date</td>
+                        <td>Status</td>
+                        <td>Update</td>
+                        <td>Delete</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                        <td>{{order.product.name}}</td>
+                        <td>{{order.product.category}}</td>
+                        <td>{{order.date_created}}</td>
+                        <td>{{order.status}}</td>
+                        <td><a href="{% url 'update_order' order.id %}" class="ubtn">Update</a></td>
+                        <td><a href="{% url 'delete_order' order.id %}" class="dbtn">Delete</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}

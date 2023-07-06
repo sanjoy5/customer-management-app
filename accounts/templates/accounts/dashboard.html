@@ -1,0 +1,110 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+
+
+<!-- Card Box  -->
+
+<div class="cardBox">
+    <div class="card">
+        <div>
+            <div class="numbers">{{total_customers}}</div>
+            <div class="cardName">Total Customer</div>
+        </div>
+        <div class="iconBox">
+            <i class="fa fa-users"></i>
+        </div>
+    </div>
+    <div class="card">
+        <div>
+            <div class="numbers">{{total_orders}}</div>
+            <div class="cardName">Total Orders</div>
+        </div>
+        <div class="iconBox">
+            <i class="fa fa-chart-pie"></i>
+        </div>
+    </div>
+
+    <div class="card">
+        <div>
+            <div class="numbers">{{delivered}}</div>
+            <div class="cardName">Order Delivered</div>
+        </div>
+        <div class="iconBox">
+            <i class="fa fa-shipping-fast"></i>
+        </div>
+    </div>
+    <div class="card">
+        <div>
+            <div class="numbers">{{pending}}</div>
+            <div class="cardName">Order Pending</div>
+        </div>
+        <div class="iconBox">
+            <i class="fa fa-chart-line"></i>
+        </div>
+    </div>
+</div>
+
+
+<!-- Details  -->
+
+<div class="details">
+    <div class="recentOrders">
+        <div class="cardHeader">
+            <h2>Recent Orders</h2>
+
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td class="date">Date</td>
+                    <td>Status</td>
+                    <td>Update</td>
+                    <td>Delete</td>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for i in orders %}
+                <tr>
+                    <td>{{i.product.name}}</td>
+                    <td>{{i.date_created}}</td>
+                    <td>{{i.status}}</td>
+                    <td><a href="{% url 'update_order' i.id %}" class="ubtn">Update</a></td>
+                    <td><a href="{% url 'delete_order' i.id %}" class="dbtn">Delete</a></td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+    <div class="recentCustomers">
+        <div class="cardHeader">
+            <h2>Recent Customers</h2>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Phone</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in customers %}
+                <tr>
+                    <td>{{i.name}}</td>
+                    <td>{{i.phone}}</td>
+                    <td><a href="{% url 'customer_details' i.id %}" class="btn">View</a></td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock content %}

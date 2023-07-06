@@ -1,0 +1,40 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+{% block title %}All Customer{% endblock title %}
+
+{% block content %}
+<div class="products">
+    <h2 class="heading">All Customers</h2>
+    <div class="products-list">
+        <table>
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Phone</td>
+                    <td>Email</td>
+                    <td>Date</td>
+                    <td>Details</td>
+                    <td>Update</td>
+                    <td>Delete</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in customers %}
+                <tr>
+
+                    <td>{{i.name}}</td>
+                    <td>{{i.phone}}</td>
+                    <td>{{i.email}}</td>
+                    <td>{{i.date_created}}</td>
+                    <td><a href="{% url 'customer_details' i.id %}" class="btn">Details</a></td>
+                    <td><a href="{% url 'update_customer' i.id %}" class="ubtn">Update</a></td>
+                    <td><a href="{% url 'delete_customer' i.id %}" class="dbtn">Delete</a></td>
+
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock content %}

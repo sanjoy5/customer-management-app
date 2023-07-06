@@ -1,0 +1,74 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+{% block title %}User{% endblock title %}
+
+
+
+{% block content %}
+<div class="cardBox">
+    <div class="card">
+        <div>
+            <div class="numbers">{{total_orders}}</div>
+            <div class="cardName">Total Orders</div>
+        </div>
+        <div class="iconBox">
+            <i class="fa fa-chart-pie"></i>
+        </div>
+    </div>
+
+    <div class="card">
+        <div>
+            <div class="numbers">{{delivered}}</div>
+            <div class="cardName">Order Delivered</div>
+        </div>
+        <div class="iconBox">
+            <i class="fa fa-shipping-fast"></i>
+        </div>
+    </div>
+    <div class="card">
+        <div>
+            <div class="numbers">{{pending}}</div>
+            <div class="cardName">Order Pending</div>
+        </div>
+        <div class="iconBox">
+            <i class="fa fa-chart-line"></i>
+        </div>
+    </div>
+    <div class="card">
+        <div>
+            <div class="numbers">{{orderout}}</div>
+            <div class="cardName">Out for Delivered</div>
+        </div>
+        <div class="iconBox">
+            <i class="fas fa-dolly-flatbed"></i>
+        </div>
+    </div>
+</div>
+
+<div class="customerProducts">
+    <div class="customerProducts-list">
+        <h2 class="heading">Order Products</h2>
+        <table>
+            <thead>
+                <tr>
+                    <td>Product</td>
+                    <td>Category</td>
+                    <td>Date</td>
+                    <td>Status</td>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>{{order.product.name}}</td>
+                    <td>{{order.product.category}}</td>
+                    <td>{{order.date_created}}</td>
+                    <td>{{order.status}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock content %}
