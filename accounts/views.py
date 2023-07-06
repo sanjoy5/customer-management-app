@@ -62,8 +62,8 @@ def logoutUser(request):
 @login_required(login_url='login')
 @admin_only
 def home(request):
-    orders = Order.objects.all()
-    customers = Customer.objects.all()
+    orders = Order.objects.all().order_by('-id')
+    customers = Customer.objects.all().order_by('-id')
     total_customers = customers.count()
     total_orders = orders.count()
     delivered = orders.filter(status="Delivered").count()
